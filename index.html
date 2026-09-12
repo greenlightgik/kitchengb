@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#191713">
+<title>Золотой Жук · кухня</title>
+<style>
+:root{
+  --bg:#11100e;--panel:#1b1915;--panel2:#24211b;--ink:#f4efe5;--muted:#bdb4a4;
+  --gold:#df9d2f;--tea:#79a883;--danger:#e37763;--line:#3a352c;--shadow:0 14px 35px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#11100e,#17140f 45%,#11100e);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.45}
+button,input,select{font:inherit}.app{max-width:1100px;margin:auto;padding:18px 14px 90px}.hero{padding:22px 20px;background:radial-gradient(circle at 90% 0,rgba(223,157,47,.17),transparent 35%),var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.kicker{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tea);font-weight:800}.hero h1{margin:.25rem 0 .4rem;font-size:clamp(1.7rem,5vw,3rem);line-height:1.05}.hero p{margin:.35rem 0;color:var(--muted);max-width:800px}.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.badge{padding:6px 10px;border-radius:999px;background:#27231b;border:1px solid #433b2d;color:#e9dcc4;font-size:.82rem}
+.sticky{position:sticky;top:0;z-index:20;padding:10px 0;background:linear-gradient(180deg,rgba(17,16,14,.98),rgba(17,16,14,.9),transparent)}.tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 8px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap;border:1px solid var(--line);background:#211e18;color:var(--muted);padding:10px 14px;border-radius:14px;cursor:pointer}.tab.active{background:var(--gold);color:#1b1408;border-color:var(--gold);font-weight:800}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 18px}.search{flex:1;min-width:220px;background:#1d1a15;border:1px solid var(--line);color:var(--ink);padding:12px 14px;border-radius:14px;outline:none}.search:focus{border-color:var(--gold)}.toolbar button{border:1px solid var(--line);background:#211e18;color:var(--ink);padding:11px 13px;border-radius:14px;cursor:pointer}
+.section{display:none}.section.active{display:block}.section-head{margin:22px 2px 14px}.section-head h2{margin:0;font-size:1.5rem}.section-head p{margin:.35rem 0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}.card-head{padding:17px 17px 13px;background:linear-gradient(135deg,rgba(121,168,131,.08),transparent 55%)}.card h3{margin:0 0 4px;font-size:1.18rem}.meta{font-size:.8rem;color:var(--muted)}.status{display:inline-flex;margin-top:8px;padding:4px 8px;border-radius:999px;font-size:.73rem;font-weight:800;background:#2d281f;color:#e7c98e;border:1px solid #4a402e}.status.work{color:#b9e3c3;border-color:#35523c}.status.draft{color:#ffd2ca;border-color:#6a3d35}
+.calc{padding:15px 17px}.input-label{display:block;color:var(--muted);font-size:.82rem;margin-bottom:6px}.input-wrap{display:flex;gap:8px}.anchor-input{width:100%;min-width:0;background:#100f0d;border:1px solid #554a38;color:#fff;padding:13px 12px;border-radius:13px;font-size:1.15rem;font-weight:750;outline:none}.anchor-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(223,157,47,.13)}.unit-chip{display:flex;align-items:center;padding:0 13px;border-radius:13px;background:#2a261e;color:#d9ccb7;border:1px solid var(--line);font-weight:750}.preset-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.preset{border:1px solid var(--line);background:#242019;color:#d8d0c3;padding:6px 9px;border-radius:10px;cursor:pointer;font-size:.8rem}.option-row{margin-top:10px}.option-row select{width:100%;background:#100f0d;color:#fff;border:1px solid var(--line);padding:10px;border-radius:11px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:13px 0}.stat{background:#242019;border:1px solid #373127;border-radius:12px;padding:10px}.stat b{display:block;color:#f3d49b;font-size:1rem}.stat span{color:var(--muted);font-size:.73rem}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:13px}.recipe-table{width:100%;border-collapse:collapse;min-width:390px}.recipe-table th,.recipe-table td{padding:9px 10px;border-bottom:1px solid #332e26;text-align:left}.recipe-table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#b9ae9c;background:#211e18}.recipe-table td:nth-child(2){font-variant-numeric:tabular-nums;font-weight:750;color:#f6dfb2;white-space:nowrap}.recipe-table tr:last-child td{border-bottom:0}.anchor-row td{background:rgba(223,157,47,.07)}.note{margin:12px 0 0;padding:10px 11px;border-left:3px solid var(--tea);background:#201e19;color:#d8d0c3;border-radius:0 10px 10px 0;font-size:.82rem}.danger{border-left-color:var(--danger)}.actions{display:flex;gap:8px;margin-top:12px}.copy-btn{flex:1;border:0;background:var(--tea);color:#0e160f;padding:10px 12px;border-radius:12px;font-weight:850;cursor:pointer}.details-btn{border:1px solid var(--line);background:#252119;color:#eee;padding:10px 12px;border-radius:12px;cursor:pointer}.details{display:none;padding:0 17px 16px;color:#d5ccbd}.details.open{display:block}.details ol,.details ul{margin:.35rem 0;padding-left:1.2rem}.details li{margin:.26rem 0}.critical{color:#f0baae}
+.menu-card{padding:17px}.menu-card h3{margin:0 0 4px}.menu-columns{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}.mini-table{width:100%;border-collapse:collapse}.mini-table td{padding:7px 0;border-bottom:1px solid #312c24}.mini-table td:last-child{text-align:right;color:#f3d49b;font-weight:750}.steps{margin:0;padding-left:1.25rem}.steps li{margin:.32rem 0}.registry{width:100%;border-collapse:collapse;min-width:700px}.registry th,.registry td{padding:10px;border-bottom:1px solid var(--line);text-align:left}.registry th{position:sticky;top:0;background:#211e18;color:#d9ccb7}.registry .has{color:#a9ddb5}.registry .none{color:#c5bcae}.warning-box{padding:14px;border:1px solid #70483f;background:#2a1d19;border-radius:15px;color:#f1c8bf;margin-bottom:14px}
+.footer{margin-top:30px;color:#8e8577;text-align:center;font-size:.78rem}.empty{display:none;padding:28px;text-align:center;color:var(--muted)}
+@media(min-width:760px){.menu-columns{grid-template-columns:1fr 1.2fr}.app{padding-left:22px;padding-right:22px}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media print{body{background:#fff;color:#111}.sticky,.toolbar,.actions,.preset-row{display:none!important}.section{display:block!important}.card{break-inside:avoid;background:#fff;border:1px solid #aaa;box-shadow:none}.details{display:block!important}.recipe-table th,.recipe-table td,.mini-table td{color:#111;background:#fff}.hero{background:#fff;box-shadow:none}.hero p,.meta,.note,.section-head p{color:#333}.app{max-width:none}}
+
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}.quick-card{padding:17px}.quick-card h3{margin:0 0 4px}.quick-block{margin-top:12px;padding:11px 12px;border:1px solid var(--line);border-radius:13px;background:#171510}.quick-block h4{margin:0 0 7px;color:#e8c987;font-size:.92rem}.quick-block ol,.quick-block ul{margin:0;padding-left:1.15rem}.quick-block li{margin:.28rem 0}.flag{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:999px;font-size:.72rem;font-weight:850;border:1px solid #6e5038;color:#ffd4a3;background:#2c2118}.flag.ok{border-color:#35523c;color:#b9e3c3;background:#182219}.flag.warn{border-color:#6a3d35;color:#ffd2ca;background:#291b18}.dessert-card{padding:17px}.dessert-card .big{font-size:1.35rem;font-weight:900;color:#f2d49c;margin:10px 0}.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}.photo-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}.photo-card img{width:100%;height:280px;object-fit:cover;display:block;cursor:pointer;background:#0d0c0a}.photo-card .body{padding:14px 16px 17px}.photo-card h3{margin:0 0 5px}.img-modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.86);align-items:center;justify-content:center;padding:18px}.img-modal.open{display:flex}.img-modal figure{margin:0;max-width:96vw;max-height:94vh}.img-modal img{display:block;max-width:100%;max-height:84vh;border-radius:17px;box-shadow:0 20px 60px rgba(0,0,0,.5)}.img-modal figcaption{text-align:center;color:#f0dfbf;margin-top:9px}.img-close{position:absolute;right:15px;top:15px;background:#221e18;color:white;border:1px solid #695b45;border-radius:11px;padding:9px 12px;cursor:pointer}.critical-head{margin:10px 0 0;padding:9px 11px;border-radius:11px;background:#311c18;border:1px solid #7c4137;color:#ffd3c9;font-weight:900}.external-link{display:inline-block;margin-top:12px;padding:9px 12px;border-radius:12px;border:1px solid #4a402e;color:#f3d49b;text-decoration:none;background:#201d18}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="kicker">Золотой Жук · рабочая кухня</div>
+    <h1>Кухонная шпаргалка v3</h1>
+    <p>Один офлайн-файл для смены: ПФ с масштабированием, фактическая отдача, отдельные десерты и фото подачи. При конфликте ТК и живой линии расхождение помечено прямо в карточке.</p>
+    <div class="badge-row"><span class="badge">Работает без интернета</span><span class="badge">Сохраняет последние значения</span><span class="badge">Кухонное округление</span><span class="badge">Версия 12.09.2026 · v3.3</span></div>
+  </header>
+
+  <div class="sticky">
+    <nav class="tabs" aria-label="Разделы">
+      <button class="tab active" data-tab="pf">ПФ и масштабирование</button>
+      <button class="tab" data-tab="line">Отдача</button>
+      <button class="tab" data-tab="desserts">Десерты</button>
+      <button class="tab" data-tab="gallery">Фото подачи</button>
+      <button class="tab" data-tab="menu">Блюда по ТК</button>
+      <button class="tab" data-tab="issues">Контроль</button>
+      <button class="tab" data-tab="registry">Реестр</button>
+    </nav>
+  </div>
+
+  <div class="toolbar">
+    <input id="search" class="search" type="search" placeholder="Поиск: вешенки, рамен, мисо, яйцо…">
+    <button id="roundToggle" type="button">Округление: кухня</button>
+    <button id="printBtn" type="button">Печать</button>
+  </div>
+
+  <main>
+    <section id="pf" class="section active">
+      <div class="section-head"><h2>Полуфабрикаты и внутренние заготовки</h2><p>У каждого калькулятора свой честный якорь: фактический выход грибов, масса мяса, количество яиц, вес белого мисо и так далее.</p></div>
+      <div class="warning-box"><b>Вешенки:</b> калькулятор использует загруженную ТК v2 с базой <b>743 г готовых обжаренных грибов</b> на 1 кг конечного ПФ. Фото-версия с 781 г здесь не используется.</div>
+      <div id="pfGrid" class="grid"></div>
+      <div id="pfEmpty" class="empty">По этому запросу ПФ не найден.</div>
+    </section>
+
+    <section id="line" class="section">
+      <div class="section-head"><h2>Фактическая отдача</h2><p>То, как блюда реально собираются на линии по Насте, Денису и собственным прогонам.</p></div>
+      <div id="lineGrid" class="quick-grid"></div><div id="lineEmpty" class="empty">Ничего не найдено.</div>
+    </section>
+    <section id="desserts" class="section">
+      <div class="section-head"><h2>Десерты</h2><p>Отдельная быстрая страница: название → вес/сборка → декор. Манго и халва ведутся раздельно.</p></div>
+      <div id="dessertGrid" class="quick-grid"></div><div id="dessertEmpty" class="empty">Десерт не найден.</div>
+    </section>
+    <section id="gallery" class="section">
+      <div class="section-head"><h2>Фото подачи</h2><p>Ткни по фото, чтобы открыть крупно.</p></div>
+      <div id="galleryGrid" class="photo-grid"></div><div id="galleryEmpty" class="empty">Фото не найдено.</div>
+    </section>
+
+    <section id="menu" class="section">
+      <div class="section-head"><h2>Сборка блюд по имеющимся картам</h2><p>Только позиции, для которых в текущем пакете есть технологическая карта.</p></div>
+      <div id="menuGrid" class="grid"></div>
+      <div id="menuEmpty" class="empty">По этому запросу блюдо не найдено.</div>
+    </section>
+
+    <section id="registry" class="section">
+      <div class="section-head"><h2>Полный реестр меню</h2><p>Вес и цена печатного меню, плюс наличие карты в текущем пакете.</p></div>
+      <div class="table-wrap"><table class="registry"><thead><tr><th>Раздел</th><th>Позиция</th><th>Меню</th><th>Цена</th><th>Статус</th></tr></thead><tbody id="registryBody"></tbody></table></div>
+    </section>
+
+    <section id="issues" class="section">
+      <div class="section-head"><h2>Расхождения и открытые точки</h2><p>То, что нельзя незаметно «додумать» вместо тест-кука.</p></div>
+      <div class="grid" id="issuesGrid"></div>
+    </section>
+  </main>
+  <div id="imgModal" class="img-modal" aria-hidden="true"><button class="img-close" type="button">Закрыть</button><figure><img id="imgModalPic" alt="Фото подачи"><figcaption id="imgModalCap"></figcaption></figure></div>
+  <footer class="footer"><a class="external-link" href="https://docs.google.com/spreadsheets/d/13qXuTVVC6ZTIHV90EzsAbAB6m07xWtE-5-dxILO8rEk/edit?usp=drivesdk" target="_blank" rel="noopener">Овощная инвентаризация ↗</a><br><br>Рабочая шпаргалка не заменяет утверждённые оригиналы ТК. Черновые v0 масштабируются математически, но коэффициенты должны быть подтверждены тест-варкой.</footer>
+</div>
+<script>
+const PF = [
+{
+ id:'oyster', name:'Вешенки в кисло-сладком соусе', version:'ТК v2 · рабочая', state:'work', source:'Вешенки_техкарта_v2',
+ anchorLabel:'Фактический выход обжаренных грибов нетто', base:743, unit:'г', defaultValue:1380,
+ anchorIngredient:'Вешенки после сухой обжарки',
+ ingredients:[
+  {n:'Рисовый уксус',a:52,u:'г'},{n:'Соевый соус',a:86,u:'г'},{n:'Кунжутное масло',a:11,u:'г'},
+  {n:'Устричный соус',a:48,u:'г'},{n:'Сахар',a:43,u:'г'},{n:'Вода, выпаривается',a:76,u:'г'},
+  {n:'Глутамат натрия',a:2,u:'г'},{n:'Чеснок нетто',a:9,u:'г',extra:'10 г брутто в базе'},
+  {n:'Имбирь нетто',a:6,u:'г',extra:'7 г брутто в базе'}],
+ stats:v=>[
+  ['Итоговый выход ПФ',v*1000/743,'г'],['Порций по 50 г',v*1000/743/50,'шт'],['Коэффициент',v/743,'×']
+ ],
+ note:'Соус считается от уже обжаренных грибов. На дне готовой партии должно остаться минимум свободной жидкости.',
+ steps:['Смешать воду, сахар, соевый, уксус, устричный и глутамат.','На максимуме сухо обжарить грибы: 2–3 минуты не трогать, затем 3–4 минуты до корочки.','Сдвинуть грибы, ввести кунжутное масло, чеснок и имбирь на 15–20 секунд.','Влить маринад и редуцировать 3–4 минуты до глазури.'],
+ critical:['Не перегружать сковороду: ориентир 300–400 г на 28 см.','Чеснок и имбирь не держать дольше 20 секунд.']
+},
+{
+ id:'gyoza_shrimp', name:'Начинка для гёдза с креветкой', version:'ТК · раскладка на 1 кг начинки', state:'work', source:'ТК начинки гёдза с креветкой',
+ anchorLabel:'Фактический вес очищенной креветки', base:670, unit:'г', defaultValue:670, anchorIngredient:'Креветки ваннамей 21/25 очищенные',
+ ingredients:[
+  {n:'Капуста пекинская для гёдза ПФ',a:150,u:'г'},{n:'Крахмал кукурузный',a:40,u:'г'},{n:'Лук зелёный ПФ',a:40,u:'г'},
+  {n:'Уксус рисовый',a:6,u:'г'},{n:'Соус соевый',a:20,u:'г'},{n:'Перец чёрный',a:1,u:'г'},{n:'Перец белый',a:1,u:'г'},
+  {n:'Чеснок очищенный ПФ',a:3,u:'г'},{n:'Имбирь очищенный ПФ',a:10,u:'г'},{n:'Соль',a:4,u:'г'},{n:'Сахар',a:8,u:'г'},
+  {n:'Масло кунжутное',a:7,u:'г'},{n:'Масло растительное',a:20,u:'г'},{n:'Сухари панко',a:20,u:'г'}],
+ stats:v=>[['Ориентировочный выход начинки',v*1000/670,'г'],['Коэффициент',v/670,'×']],
+ note:'Масштабирование идёт от фактического веса очищенной креветки: 670 г креветки = 1 кг общей закладки начинки по карте.',
+ steps:['Отвесить очищенную креветку и пересчитать остальные компоненты по калькулятору.','Технология измельчения и замеса на фото техкарты не представлена — не додумывать.'],
+ critical:['Не путать с отдачей готовых гёдза: здесь только ПФ начинки.','Фактическую технологию замеса дописать после прогона/уточнения у старшего.']
+},
+{
+ id:'blackpepper_sauce', name:'Соус для креветок в чёрном перце', version:'ТК v1.0 · до тест-кука', state:'draft', source:'TK_Shrimp_BlackPepper_v1',
+ anchorLabel:'Количество порций', base:1, unit:'порц.', defaultValue:1, anchorIngredient:'Расчёт на блюдо',
+ ingredients:[
+  {n:'Соус черноперечный Tamaki',a:40,u:'г'},{n:'Соус устричный',a:12,u:'г'},
+  {n:'Перец чёрный крупного помола',a:3,u:'г',extra:'2 г в масляную стадию + 1 г в финиш'},
+  {n:'Вода',a:20,u:'г',extra:'до 20 г, регулировка густоты'}],
+ stats:v=>[['Закладка соуса по ТК',v*75,'г'],['Расчётный выход соусной части',v*65,'г'],['Tamaki + устричный',v*52,'г']],
+ note:'Это состав соусной части по ТК v1.0 до тест-кука. На фактической линии Настя даёт 50 г готового соуса + 20 г воды. Не приравнивать эти две цифры автоматически: рабочая база могла быть скорректирована после составления карты.',
+ steps:['После лука и чеснока прогреть 2 г крупного чёрного перца 15–20 секунд.','Добавить Tamaki 40 г и устричный соус 12 г, перемешать и довести до кипения.','При необходимости добавить до 20 г воды до консистенции глянцевой глазури.','После возврата креветок в последние 10 секунд добавить оставшийся 1 г перца.'],
+ critical:['Перец только крупного помола.','Дополнительные сахар, соль и соевый соус по карте не добавлять.','Фактическая линия сейчас: 50 г соуса + 20 г воды; ТК v1.0 помечена как «до тест-кука».']
+},
+{
+ id:'kungchicken', name:'Курица в маринаде для Кунг-пао', version:'Фактическая корректировка · 150 г/порция', state:'work', source:'ТК v5 + уточнение линии',
+ anchorLabel:'Куриное бедро после зачистки, нетто', base:150, unit:'г', defaultValue:750, anchorIngredient:'Куриное бедро б/к',
+ ingredients:[{n:'Соевый соус светлый',a:10,u:'г'},{n:'Вода',a:8,u:'г'},{n:'Рисовый уксус',a:2,u:'г'},{n:'Кукурузный крахмал',a:5,u:'г'},{n:'Сода (0,5% от мяса)',a:.75,u:'г'},{n:'Белый перец',a:.3,u:'г'}],
+ stats:v=>[['Порций по 150 г',v/150,'шт'],['Сода 0,5%',v*.005,'г'],['Выдержка в холодильнике',30,'мин']],
+ note:'Корректировка линии: курицы теперь 150 г нетто на порцию. Остальные компоненты маринада на порцию сохранены; сода считается строго 0,5% от фактической массы мяса.',
+ steps:['Нарезать курицу.','Смешать маринад и тщательно вымешать с мясом.','Убрать на 30 минут в холодильник.'],
+ critical:['Сода строго 0,5% от массы мяса.','Для 5 порций: 750 курицы / 50 соя / 40 вода / 10 уксус / 25 крахмал / 3,75 сода / 1,5 белый перец.']
+},
+{
+ id:'kungsauce', name:'Соус-микс «Кунг-пао»', version:'Заготовка внутри ТК v5', state:'work', source:'Курица Кунг-пао',
+ anchorLabel:'Желаемый выход соус-микса', base:1000, unit:'г', defaultValue:1000, anchorIngredient:'Готовый соус-микс', hideAnchorRow:true,
+ ingredients:[{n:'Соевый соус светлый',a:200,u:'г'},{n:'Соевый соус тёмный',a:67,u:'г'},{n:'Chinkiang',a:200,u:'г'},{n:'Сахар',a:133,u:'г'},{n:'Вода',a:400,u:'г'}],
+ stats:v=>[['Порций по 75 г до уварки',v/75,'шт'],['Ожидаемый выход после уварки',v/75*65,'г'],['Хранение',14,'суток']],
+ note:'Крахмал и кунжутное масло в этот ПФ не входят: на отдаче отдельно 5 г крахмала + 15 мл воды и 3 мл кунжутного масла на порцию.',
+ steps:['Соединить компоненты и полностью растворить сахар.','Перелить в герметичную ёмкость, промаркировать.','Перед каждой отдачей встряхивать.'],
+ critical:['Крахмал не хранить в соусе.','Chinkiang не заменять рисовым уксусом.']
+},
+{
+ id:'padthai', name:'Соус Пад Тай', version:'v1 · до полного тест-кука', state:'draft', source:'TK_PadThai_v1',
+ anchorLabel:'Фактическое количество Pad Thai Aroy-D', base:450, unit:'г', defaultValue:450, anchorIngredient:'Pad Thai Aroy-D',
+ ingredients:[{n:'Рыбный соус Aroy-D',a:120,u:'г'},{n:'Сахарный сироп 1:1',a:100,u:'г'}],
+ stats:v=>{let out=v*670/450;return [['Ожидаемый выход соуса',out,'г'],['Порций по 60 г',out/60,'шт'],['Порций по 55 г',out/55,'шт']]},
+ note:'Каждую новую бутылку Aroy-D пробовать. Сироп в исходной карте допускает корректировку примерно на ±20–30 г на базовый батч.',
+ steps:['Соединить Aroy-D, рыбный соус и сироп.','Перемешать до однородности и убрать в закрытую ёмкость.'],
+ critical:['Лайм в заготовку не добавлять.','Порция 55–60 г пока уточняется тест-куком.']
+},
+{
+ id:'hong', name:'Хун-шао-жоу: грудинка и соус', version:'ТК v3 · рабочая', state:'work', source:'Томлёная свиная грудинка по-китайски',
+ anchorLabel:'Целевой или фактический выход готового мяса', base:1000, unit:'г', defaultValue:1000, anchorIngredient:'Готовое мясо после томления',
+ ingredients:[
+  {n:'Сырая свиная грудинка, ориентир',a:1600,u:'г'},{n:'Имбирь',a:56,u:'г'},{n:'Зелёный лук',a:60,u:'г'},
+  {n:'Бадьян',a:2,u:'шт'},{n:'Кассия',a:1,u:'пал.'},{n:'Лавр, опционально',a:2,u:'шт'},
+  {n:'Белый перец',a:3,u:'г'},{n:'Соевый соус светлый',a:112,u:'г'},{n:'Соевый соус тёмный',a:40,u:'г'},
+  {n:'Сахар на карамель',a:112,u:'г'},{n:'Вода на старт карамели',a:75,u:'г'},{n:'Горячая вода для карамели',a:427,u:'г'},
+  {n:'Вода в уксусную смесь',a:128,u:'г'},{n:'Chinkiang',a:24,u:'г'},{n:'Сахар в уксусную смесь',a:8,u:'г'},
+  {n:'Доп. вода / бульон по уровню',min:430,max:640,u:'г',extra:'ориентир 535 г на базу'}],
+ stats:v=>[['Выход соуса после уварки',v*.8,'г'],['Порций мяса по 100 г',v/100,'шт'],['Соуса на эти порции',v/100*80,'г']],
+ note:'Для этой карты ввод является целевым или уже полученным выходом мяса. Дополнительную воду всё равно вести по фактическому уровню, а не слепо по цифре.',
+ steps:['Нарезать 2–3 см, бланшировать, промыть и обсушить.','Подрумянить 5–8 минут.','Сварить светло-янтарную карамель и осторожно развести горячей водой.','Томить 90–120 минут на минимальном кипении.','Мясо вынуть, жидкость процедить, обезжирить и уварить.'],
+ critical:['КРИТИЧНО ДО СТАРТА: грудинку резать кусками 2–3 см. Мельче не резать.','Карамель только светло-янтарная.','Мясо и соус хранить раздельно.']
+},
+{
+ id:'tare', name:'Тарэ авасэ для мисо-рамена', version:'v0 · гейтится тест-варкой', state:'draft', source:'ТК-ПФ Тарэ авасэ',
+ anchorLabel:'Белое мисо, фактическая масса', base:1000, unit:'г', defaultValue:1000, anchorIngredient:'Белое мисо (shiro)',
+ ingredients:[{n:'Красное мисо (aka)',a:2000,u:'г'},{n:'Кунжутная паста',a:238,u:'г'},{n:'Имбирь сырой, тёртый',a:238,u:'г'},{n:'Соевый соус',a:381,u:'г'},{n:'Устричный соус',a:238,u:'г'},{n:'Хондаси',a:67,u:'г'},{n:'Сахар',a:190,u:'г'}],
+ stats:v=>{let out=v*4.35;return [['Ожидаемый выход тарэ',out,'г'],['Порций по 50 г',out/50,'шт'],['Брикетов по 500 г',out/500,'шт']]},
+ note:'Вся соль чаши находится здесь. Тарэ на сборку должно быть комнатной температуры.',
+ steps:['Натереть имбирь.','Соединить компоненты и пробить до гладкой пасты.','Фасовать в вакуум по 500 г и заморозить.'],
+ critical:['Сырого чеснока нет.','Размороженный брикет не перезамораживать.','Если 50 г солит, тестовый диапазон 44–46 г.']
+},
+{
+ id:'broth', name:'Свиной бульон «Тонкоцу лайт»', version:'v0 · гейтится тест-варкой', state:'draft', source:'ТК-ПФ Свиной бульон',
+ anchorLabel:'Желаемый выход готового бульона', base:3500, unit:'мл', defaultValue:3500, anchorIngredient:'Готовый несолёный бульон', hideAnchorRow:true,
+ ingredients:[{n:'Свиные кости, ориентир',a:1400,u:'г'},{n:'Свиная кожа, ориентир',a:600,u:'г'},{n:'Обрезь, ориентир',a:160,u:'г'},{n:'Вода на старт',a:5500,u:'мл'},{n:'Имбирь',a:40,u:'г'},{n:'Нэги / лук',a:100,u:'г'},{n:'Чеснок, опционально',a:30,u:'г'}],
+ stats:v=>[['Порций по 350 мл',v/350,'шт'],['Сырья суммарно, ориентир',v/3500*2200,'г'],['Стартовой воды',v/3500*5500,'мл']],
+ note:'Коэффициенты v0 приблизительные. Кости + кожа + обрезь в базовой строке округлены и не складываются идеально в заявленные 2,2 кг.',
+ steps:['Бланшировать кости и кожу, первую воду слить и всё промыть.','Залить чистой водой, добавить ароматику, снимать пену.','Томить 6–8 часов при тихом кипении.','Процедить, снять жир, уварить на 15–20%.','Остудить пробу: должна желироваться.'],
+ critical:['Соль 0.','Бурное кипение недопустимо.','Фактический выход требует тест-варки.']
+},
+{
+ id:'oil', name:'Свиное аромамасло чеснок–имбирь', version:'v0 · гейтится тест-варкой', state:'draft', source:'ТК-ПФ Аромамасло свиное',
+ anchorLabel:'Свиной смалец, фактическая масса', base:120, unit:'г', defaultValue:120, anchorIngredient:'Свиной смалец',
+ ingredients:[{n:'Подсолнечное масло',a:300,u:'мл'},{n:'Чеснок рубленый',a:150,u:'г'},{n:'Имбирь рубленый',a:40,u:'г'},{n:'Белая часть зелёного лука',a:80,u:'г'}],
+ stats:v=>[['Выход масла, минимум',v/120*366,'мл'],['Выход масла, максимум',v/120*387,'мл'],['Порций по 7 мл, ориентир',v/120*376.5/7,'шт']],
+ note:'Выход не равен сумме закладки: ароматика процеживается и удерживает часть жира.',
+ steps:['Растопить смалец, влить подсолнечное и прогреть до 120–130 °C.','Добавить чеснок и имбирь, вести до золотистого.','Добавить белый лук ещё на 1–2 минуты.','Снять, настоять 15–20 минут и процедить.'],
+ critical:['Не выше 130–140 °C.','Коричневый чеснок даёт горечь.','Фактический коэффициент выхода пока тестовый.']
+},
+{
+ id:'ajitama', name:'Адзи-тама', version:'v0 · гейтится тест-варкой', state:'draft', source:'ТК-ПФ Адзи-тама',
+ anchorLabel:'Количество яиц', base:10, unit:'шт', defaultValue:4, anchorIngredient:'Яйца',
+ options:{label:'Расчёт покрытия маринадом',values:[{v:'safe',t:'С запасом: база на 10 яиц',base:10},{v:'compact',t:'Плотная укладка: база на 12 яиц',base:12}]},
+ ingredients:[{n:'Соевый соус',a:500,u:'мл'},{n:'Вода',a:750,u:'мл'},{n:'Сахар',a:80,u:'г'},{n:'Рисовый уксус',a:30,u:'мл'},{n:'Имбирь',a:20,u:'г'},{n:'Чеснок',a:10,u:'г'}],
+ dynamicBase:(card)=>card.option==='compact'?12:10,
+ stats:(v,b)=>[['Объём маринада, ориентир',v/b*1250,'мл'],['Время варки',7,'мин'],['Маринование',8,'ч минимум']],
+ note:'Геометрия ёмкости влияет сильнее линейной математики. Режим «с запасом» безопаснее для полного покрытия.',
+ steps:['Маринад прогреть только до растворения сахара и полностью остудить.','Яйца комнатной температуры опустить в кипяток на 7:00.','Сразу в ледяную воду минимум на 5 минут, очистить.','Залить холодным маринадом и выдержать 8–10 часов.'],
+ critical:['После 10–12 часов растёт риск пересола и резинового края.','Готовить под реальный оборот.']
+},
+
+{
+ id:'karaage', name:'Маринад Карааге', version:'Фактическая раскладка', state:'work', source:'Раскладка кухни',
+ anchorLabel:'Курица нетто', base:1000, unit:'г', defaultValue:1773, anchorIngredient:'Курица',
+ ingredients:[{n:'Соевый соус',a:100,u:'г'},{n:'Рисовый уксус',a:25,u:'г'},{n:'Сахар',a:15,u:'г'},{n:'Имбирь свежий тёртый',a:30,u:'г'},{n:'Чеснок тёртый',a:20,u:'г'},{n:'Кунжутное масло',a:10,u:'г'},{n:'Белый перец',a:2,u:'г'},{n:'MSG / Ajinomoto',a:1,u:'г'}],
+ stats:v=>[['Всего маринада',v*.203,'г'],['Коэффициент',v/1000,'×'],['Курица',v,'г']],
+ note:'Состав маринада подтверждён. Время/режим маринования отдельно пока не зафиксированы.',
+ steps:['Взвесить курицу нетто.','Пересчитать компоненты по фактической массе.','Смешать маринад до растворения сахара и равномерно распределить по курице.'],
+ critical:['Не придумывать время маринования: его ещё надо получить у кухни.']
+},
+{
+ id:'phostart', name:'Фо-бо: закладка бульона', version:'Живая раскладка · технология дописывается', state:'work', source:'Фото раскладки бульона',
+ anchorLabel:'Вода на старт', base:1, unit:'л', defaultValue:10, anchorIngredient:'Вода',
+ ingredients:[{n:'Кости (соотношение к воде 1:1)',a:1,u:'кг'},{n:'Имбирь, подпалить',a:30,u:'г'},{n:'Лук репчатый без шелухи, подпалить',a:200,u:'г'},{n:'Кориандр сухой',a:6,u:'г'},{n:'Бадьян',a:.8,u:'г'},{n:'Кардамон, раздавить',a:.7,u:'г'},{n:'Гвоздика',a:1/7,u:'г'},{n:'Корица палочками',a:1,u:'г'},{n:'Семена фенхеля',a:1,u:'г'}],
+ stats:v=>[['Кости',v,'кг'],['Лук',v*200,'г'],['Кориандр',v*6,'г']],
+ note:'Это закладка от литров стартовой воды. Время варки, подготовка костей, порядок закладки специй и целевой выход ещё дописываются по реальному процессу.',
+ steps:['Подпалить имбирь.','Лук очистить от шелухи и подпалить.','Кардамон раздавить.','Остальную технологию фиксировать по фактической варке, без догадок.'],
+ critical:['На 10 л воды: 10 кг костей / 300 имбирь / 2000 лук / 60 кориандр / 8 бадьян / 7 кардамон / 1,43 гвоздика / 10 корица / 10 фенхель.']
+},
+{
+ id:'phofinish', name:'Фо-бо: финиш готового бульона', version:'По фактическому выходу', state:'work', source:'Фото раскладки бульона',
+ anchorLabel:'Фактический выход готового бульона', base:1, unit:'л', defaultValue:8, anchorIngredient:'Готовый бульон',
+ ingredients:[{n:'Рыбный соус',a:20,u:'мл'},{n:'Сахар, опционально',a:7,u:'г'},{n:'Соль — вариант 1',a:7,u:'г'},{n:'Соль — вариант 2',a:5,u:'г',extra:'если используем hạt nêm'},{n:'Hạt nêm — вариант 2',a:5,u:'г',extra:'вместе с 5 г соли'}],
+ stats:v=>[['Рыбный соус',v*20,'мл'],['Соль, вариант 1',v*7,'г'],['Соль + hạt nêm, вариант 2',v*10,'г суммарно']],
+ note:'Этот блок считается не от стартовых 10 литров, а только после процеживания по фактическому литражу готового бульона.',
+ steps:['После варки определить фактический выход в литрах.','Выбрать схему соли: 7 г/л либо 5 г соли + 5 г hạt nêm на литр.','Внести рыбный соус 20 мл/л; сахар 7 г/л только если нужен по факту.'],
+ critical:['Не считать финальную соль и рыбный соус от стартового объёма воды.']
+},
+{
+ id:'puer', name:'Внутренние заготовки Пуэромису', version:'ТК v1.4 · производственная', state:'work', source:'tk_puerromisu_v1_4',
+ anchorLabel:'Маскарпоне, фактическая масса', base:500, unit:'г', defaultValue:500, anchorIngredient:'Маскарпоне 45%',
+ ingredients:[
+  {group:'Крем',n:'Пат-а-бомб, готовый',a:162,u:'г'},{group:'Крем',n:'Сливки 33%',a:280,u:'г'},{group:'Крем',n:'Концентрат ча гао',a:33,u:'г'},
+  {group:'Пат-а-бомб',n:'Желток пастеризованный',a:50,u:'г'},{group:'Пат-а-бомб',n:'Сахар',a:70,u:'г'},{group:'Пат-а-бомб',n:'Глюкозный сироп',a:22,u:'г'},{group:'Пат-а-бомб',n:'Вода',a:25,u:'г'},
+  {group:'Концентрат',n:'Ча гао',a:3,u:'г'},{group:'Концентрат',n:'Лимонная кислота',a:.5,u:'г'},{group:'Концентрат',n:'Вода 90 °C',a:30,u:'г'},
+  {group:'Пропитка',n:'Ча гао',a:2,u:'г'},{group:'Пропитка',n:'Вода',a:130,u:'г'},{group:'Пропитка',n:'Сахар',a:12,u:'г'},{group:'Пропитка',n:'Вода для сиропа',a:12,u:'г'},
+  {group:'Сборка',n:'Савоярди',a:195,u:'г'},{group:'Декор',n:'Молотый шу-пуэр',a:8,u:'г'},{group:'Декор',n:'Какао 70%',a:12,u:'г'},{group:'Декор',n:'Сахар на шард',a:70,u:'г'},{group:'Декор',n:'Глюкоза на шард',a:7,u:'г'}],
+ stats:v=>[['Порций',v/62.5,'шт'],['Выход крема',v/500*975,'г'],['Ориентир готового десерта',v/62.5*168,'г']],
+ note:'Карта заявляет 168 ±5 г на порцию, тогда как меню заявляет 250 г. В пропитке есть арифметическая блоха: текст говорит около 22 г, сборка использует 16 г.',
+ steps:['Сделать и охладить пропитку и концентрат ча гао.','Сварить сироп пат-а-бомб до 121 ±1 °C и влить в желток при взбивании.','Маскарпоне соединять с пат-а-бомб только лопаткой.','Вмешать концентрат, затем сливки в три приёма.','Собрать без пауз и выдержать минимум 6 часов.'],
+ critical:['Маскарпоне не взбивать миксером.','Сироп пат-а-бомб ровно 121 ±1 °C.','Срок 72 ч только после МУК-валидации.']
+}
+];
+
+
+const LINE = [
+{name:'Креветки в перечном соусе',meta:'Фактическая линия + состав соуса из ТК',flag:'подтверждено',search:'креветки перечный black pepper tamaki устричный соус',blocks:[
+{h:'Ход на линии',t:'ol',i:['Креветки просушить и обвалять в крахмале.','Обжарить с двух сторон на растительном масле и снять.','Сливочное масло 10 г, огонь на 6, лук 50 г.','Когда лук готов — чеснок 10 г крупно.','Соус 50 г + вода 20 г, прогреть.','Вернуть креветки, перемешать и выключить.']},
+{h:'Состав соуса по ТК v1.0',t:'ul',i:['Tamaki black pepper — 40 г.','Устричный соус — 12 г.','Чёрный перец крупного помола — 3 г: 2 г прогреть в масле, 1 г в финиш.','Вода — до 20 г для регулировки густоты.']},
+{h:'Важно',t:'ul',i:['ТК v1.0 составлена до тест-кука. Фактические 50 г готового соуса на линии не приравниваем автоматически к сумме компонентов ранней карты.']},
+{h:'Подача',t:'ul',i:['Рис на тарелку.','По центру креветки с соусом: соус вниз, креветки вверх.','Сверху кунжут васаби, порезанная кинза и красный чили пополам.']}]},
+{name:'Пад Тай с креветками',meta:'Фактическая линия',flag:'подтверждено',search:'пад тай pad thai',blocks:[
+{h:'Ход',t:'ol',i:['Рисовая лапша 75 г в холодную воду и варить.','Креветки просушить, обжарить на масле без соли.','Чеснок + чуть масла, обжарить; креветки с чесноком убрать в миску.','1 яйцо разбить лопаткой на кусочки.','Лапша к яйцу + чуть масла.','Соус Пад Тай 40 г + немного воды.','Белая часть зелёного лука, вернуть креветки.','Зелёную часть пекинки соломкой, добавить и перемешать.']},
+{h:'Подача',t:'ul',i:['Сверху дроблёный арахис и порезанная кинза.']}]},
+{name:'Кунг-пао',meta:'Фактический прогон + сверка с ТК',flag:'почти закрыто',search:'кунг пао kung pao хуаджяо',blocks:[
+{h:'Ход',t:'ol',i:['В раскалённом масле прогреть 2 сухих чили и хуаджяо, снять.','Курица: сначала задать корку, затем нормально прожарить, снять.','В ту же сковороду чеснок, имбирь и белую/корневую часть зелёного лука.','Залить соусом и прогреть.','Вернуть курицу.','Добавить крахмальную смесь, загустить и хорошо обвалять курицу в соусе.','Выложить на рис.']},
+{h:'Подача',t:'ul',i:['Сверху прогретые чили и хуаджяо.','Перья зелёного лука сверху.','Арахисом посыпать сверху.']},
+{h:'Открытая точка',t:'ul',i:['Кунжутное масло в финале прописано в ТК, но на реальной линии пока не подтверждено. Уточнить у Дениса.']}]},
+{name:'Том Ям',meta:'Фактическая линия',flag:'подтверждено',search:'том ям',blocks:[
+{h:'Ход',t:'ol',i:['Бульон + рыбный соус 10 г, довести до кипения.','Морепродукты проварить 1–2 минуты.','Добавить кокосовые сливки и прогреть до «вот-вот закипит», но НЕ кипятить.','В пустом сотейнике быстро обжарить вешенки.']},
+{h:'Подача',t:'ul',i:['Рис 75 г горкой по центру.','Влить бульон, выложить морепродукты и вешенки.','Черри пополам, кинза, волокнистый перец, капли красного масла по кругу.']}]},
+{name:'Свинина в кисло-сладком',meta:'Фактическая линия',flag:'подтверждено',search:'свинина кисло сладком',blocks:[
+{h:'Ход',t:'ol',i:['Свинину обсушить, крахмал, обжарить до золотистости.','Ананас, затем лук, затем перец — обжарить.','Черпак соуса.','В самом конце чуть кунжутного масла.','Рис разогреть с водой в микроволновке.']},
+{h:'Подача',t:'ul',i:['Рис, сверху свинина с овощами.','Чёрно-белый кунжут и кинза.']}]},
+{name:'Салат овощной / Ясай-юдзу',meta:'Фактическая линия',flag:'подтверждено',search:'ясай юдзу овощной салат',blocks:[
+{h:'Ход',t:'ol',i:['Огурцы очистить и убрать семена, нарезать треугольниками.','Черри пополам, руккола, чуть чеснока на тёрке.','Замешать с соусом ясай-юдзу.']},
+{h:'Подача',t:'ul',i:['Сверху ПФ маринованный красный лук и листья кинзы.']}]},
+{name:'Маринованный дайкон',meta:'Фактическая линия',flag:'подтверждено',search:'дайкон',blocks:[{h:'Подача',t:'ul',i:['Дайкон 50 г в соусник.','Сверху лук, как на гёдза.']}]},
+{name:'Вешенки в кисло-сладком',meta:'Фактическая линия',flag:'подтверждено',search:'вешенки',blocks:[{h:'Ход',t:'ol',i:['Вешенки 50 г на сковороду, чуть воды, прогреть/обжарить.']},{h:'Подача',t:'ul',i:['В соусник, сверху ПФ маринованный красный лук кубиком.']}]},
+{name:'Карааге',meta:'Фактическая отдача',flag:'подтверждено',search:'карааге',blocks:[{h:'Ход',t:'ol',i:['Курицу обжарить во фритюре.']},{h:'Подача',t:'ul',i:['Сверху лук перьями.','Рядом лайм.','Два соусника: кунжутный и шрирача-майя.']}]},
+{name:'Гёдза',meta:'Фактический декор',flag:'частично',search:'гедза гёдза креветка свинина курица',blocks:[{h:'Декор',t:'ul',i:['Свинина: жёлтый кунжут + зелёный лук.','Креветка: розовый кунжут + листья кинзы.','Курица: декор пока не зафиксирован.']}]},
+{name:'Битые огурцы',meta:'Фактическая линия',flag:'подтверждено',search:'битые огурцы',blocks:[{h:'Ход',t:'ol',i:['Огурец слегка отбить, нарезать треугольниками с кожурой.','Заправить соусом для битых огурцов.']},{h:'Подача',t:'ul',i:['Сверху зелёный лук перьями.']}]},
+{name:'Салат с креветками и авокадо',meta:'Фактическая линия',flag:'подтверждено',search:'салат креветки авокадо',blocks:[{h:'Ход',t:'ol',i:['Огурцы очистить и нарезать, черри пополам, авокадо кубиком.','Айсберг + руккола, замешать с соусом.','Креветки обсушить, обжарить с чесноком и щепоткой соли.']},{h:'Подача',t:'ul',i:['Сначала айсберг и руккола, сверху овощи, в конце креветки.']}]},
+{name:'Мисо-рамен',meta:'Фактическая линия',flag:'подтверждено',search:'рамен мисо',blocks:[{h:'Ход',t:'ol',i:['Яичная лапша: 1 свёрток в кипящую воду до готовности.','Параллельно разогреть бульон.','В тарелку 50 г смеси рамена + 10 г жира, слегка разогреть. Не перегревать.','Грудинку разогреть в микроволновке.','Бульон вливать постепенно: немного → размешать → доливать дальше, постоянно мешая.','Выложить лапшу.']},{h:'Подача',t:'ul',i:['Грудинка, маринованное яйцо пополам, лук перьями, нори.']}]},
+{name:'Фо-бо',meta:'Фактическая отдача',flag:'подтверждено',search:'фо бо pho bo',blocks:[{h:'Ход',t:'ol',i:['Рисовая лапша 75 г варится отдельно.','Говяжий бульон в сотейник + рыбный соус 20 г.','После закипания добавить мясо слайсами и сварить до готовности.']},{h:'Подача',t:'ul',i:['В тарелку бульон, затем лапша и мясо.','Ростки, красный чили пополам, свежий красный лук тонкими полукольцами, кинза листьями, зелёный лук перьями.']}]},
+{name:'Хун-шао-жоу',meta:'Фактическая отдача',flag:'подтверждено',search:'хун шао жоу',blocks:[{h:'КРИТИЧНО ДО ЗАГОТОВКИ',t:'ul',i:['Грудинку резать кусками 2–3 см. Мельче не резать: меняется томление и структура.']},{h:'Отдача',t:'ol',i:['Рис и грудинку разогреть в микроволновке.','Грудинку на сковороду, добавить соус, прогреть.','Крахмал с водой до лёгкого загущения и полного покрытия грудинки.']},{h:'Подача',t:'ul',i:['Рис, сверху грудинка с соусом.','Лук фри, по краям перья зелёного лука, сбоку черри пополам, по центру кинза.']}]}
+];
+
+const DESSERTS = [
+{name:'Манго',meta:'Отдельная позиция',big:'150 г',search:'манго',steps:['Нарезать 150 г.']},
+{name:'Халва',meta:'Отдельная позиция',big:'150 г',search:'халва',steps:['Нарезать 150 г.']},
+{name:'Фисташка-малина',meta:'Подача',big:'декор',search:'фисташка малина',steps:['На круглой тарелке сделать точку фисташкового сиропа и от точки зигзаг.','Поставить торт на точку.','Зигзагом полить торт фисташкой, сверху малина.','Протёртые фисташки/орехи посыпать сверху.']},
+{name:'Чизкейк',meta:'Подача',big:'пудра',search:'чизкейк',steps:['Пудра снизу и сверху.']},
+{name:'Пирожное «Картошка»',meta:'Название из сообщения Насти',big:'декор',search:'картошка метеорит',steps:['Тарелку посыпать пудрой.','Поставить пирожное.','Полить шоколадным топингом.','Сбоку выдуть золотом.'],note:'Соответствие названию «Золотой метеорит» в меню не подтверждено, не склеивать автоматически.'},
+{name:'Груша в пуэре',meta:'Фактическая подача',big:'намисян = пуэрный сироп',search:'груша пуэр намисян',steps:['Грушу ненадолго прогреть в микроволновке до тёплого состояния.','На тарелку выложить два соуса.','Полить грушу намисяном.','Поставить грушу с краю на соус.','Мята.','Свободную часть тарелки посыпать измельчённым грецким орехом.']},
+{name:'Пуэромису',meta:'Сборка по ТК v1.4',big:'168 ±5 г по ТК',search:'пуэромису',steps:['Савоярди 22 г → пропитка 14 г.','Крем 60 г.','Крошка савоярди 2 г + пропитка 2 г.','Ещё крем 60 г.','Плёнка в контакт, выдержка минимум 6 часов.','Декор: молотый шу-пуэр, какао, 3 капли ча гао, ягода, карамельный шард.'],note:'Меню заявляет 250 г, ТК 168 ±5 г. Производственная карта и калькулятор находятся во вкладке ПФ.'}
+];
+
+const GALLERY = [
+{title:'Фо-бо — фактическая подача',caption:'Фото реальной тарелки. Мясо сверху, лапша в бульоне, ростки, красный лук, зелёный лук, кинза и красный чили.',img:``,search:'фо бо pho bo'},
+{title:'Чайная груша — подача',caption:'Увеличенный референс подачи из меню.',img:``,search:'груша чайная'},
+{title:'Лист меню — визуальные референсы',caption:'Общий лист меню для сверки подачи.',img:``,search:'меню десерты подача'}
+];
+
+const MENU = [
+{name:'Вешенки в кисло-сладком соусе',meta:'Закуска · меню 50 г / 150 ₽',status:'ТК ПФ v2',ings:[['Вешенки ПФ','50 г']],steps:['Отвесить 50 г чистыми щипцами.','Выложить в посуду по фактическому стандарту подачи.'],note:'ПФ напрямую порционируется и продаётся как самостоятельная закуска.'},
+{name:'Креветки в соусе из чёрного перца',meta:'Горячее · меню 350 г / 850 ₽',status:'v1.0 · до тест-кука',ings:[['Креветки 26/30','120 г'],['Крахмал','5 г'],['Соль','1 г'],['Растительное масло','15 г'],['Сливочное масло','30 г'],['Лук нетто','40 г'],['Чеснок нетто','10 г'],['Tamaki black pepper','40 г'],['Устричный соус','12 г'],['Чёрный перец','3 г'],['Вода','до 20 г'],['Рис готовый','150 г'],['Зелёный лук','5 г'],['Кунжут','2 г']],steps:['Обсушить креветки, посолить, обвалять в крахмале.','Обжарить 60–90 секунд с первой стороны и 30–60 со второй, снять.','Лук 90–120 секунд, чеснок 25–30 секунд, затем 2 г перца.','Добавить соусы, вернуть креветки на 45–60 секунд, 1 г перца в финал.','Фактический декор: кунжут васаби, порезанная кинза, красный чили пополам.'],note:'Фактическая линия по маслу/луку/соусу отличается от ранней ТК; см. вкладку Отдача.'},
+{name:'Курица Кунг-пао',meta:'Горячее · меню 400 г / 650 ₽',status:'ТК v5',ings:[['Курица в маринаде','150 г'],['Соус-микс','75 г'],['Растительное масло','30 г'],['Сухой чили','5 г'],['Хуаджяо','1 г'],['Чеснок нетто','10 г'],['Имбирь нетто','8 г'],['Зелёный лук','20 г'],['Арахис','30 г'],['Крахмал','5 г + 15 мл воды'],['Кунжутное масло','3 г, по ТК; линия уточняется'],['Рис готовый','150 г']],steps:['Обжарить курицу и снять.','В масле раскрыть чили и хуаджяо, быстро добавить чеснок и имбирь.','Ввести соус, вернуть курицу, загустить крахмальной водой.','Зелёный лук, арахис и кунжутное масло в финал.'],note:'ТК даёт около 445 г с рисом, меню заявляет 400 г.'},
+{name:'Пад Тай с креветками',meta:'Горячее · меню 350 г / 800 ₽',status:'v1 · до полного тест-кука',ings:[['Рисовая лапша сухая','75 г → около 165 г'],['Креветки 21/25','110 г брутто'],['Яйцо','1 шт'],['Чеснок нетто','5 г'],['Соус Пад Тай','55–60 г'],['Масло','20 мл'],['Китайская капуста','40 г'],['Зелёный лук','10 г'],['Арахис','10 г'],['Кинза','5 г'],['Лайм','¼ шт']],steps:['Замочить/подготовить лапшу по фактическому SKU.','Быстро обжарить креветки, добавить яйцо и чеснок.','Ввести лапшу и соус, довести до впитывания без жидкости на дне.','Финишировать капустой, луком, арахисом, кинзой и лаймом.'],note:'Ожидаемый выход 370–420 г, меню заявляет 350 г.'},
+{name:'Хун-шао-жоу',meta:'Горячее · меню 350 г / 650 ₽',status:'ТК v3',ings:[['Готовое мясо','100 г'],['Соус','80 г'],['Рис готовый','150 г'],['Жареный лук','5 г'],['Кинза','3 г'],['Зелёный лук','5 г']],steps:['Прогреть мясо и соус вместе до +65 °C, не кипятить.','Подать с рисом и финишными топингами.'],note:'Расчётный выход около 343 г, меню заявляет 350 г.'},
+{name:'Мисо-рамен',meta:'Суп · меню 750 г / 1 000 ₽',status:'v0 · гейтится тест-варкой',ings:[['Несолёный бульон','350 мл'],['Тарэ авасэ','50 г'],['Свиное аромамасло','7 мл'],['Лапша','по тесту'],['Хун-шао-жоу','2–3 ломтика'],['Адзи-тама','1 шт'],['Нэги','5 г'],['Нори','1 лист'],['Сливочное масло','5–7 г, опц.'],['Ходзича-масло','2–3 капли, опц.']],steps:['Прогреть миску.','На дно тарэ и аромамасло.','Влить 50–100 мл бульона 90–95 °C, взбить 10–15 секунд.','Долить остальной бульон, внести сухо стряхнутую лапшу и топинги.'],note:'Навеска лапши и итоговый вес чаши пока не утверждены.'},
+{name:'Пуэромису',meta:'Десерт · меню 250 г / 750 ₽',status:'ТК v1.4',ings:[['Савоярди','22 г'],['Пропитка','14 г + 2 г в слой'],['Крем','60 г + 60 г'],['Молотый шу-пуэр','около 1 г'],['Какао','около 1,5 г'],['Ча гао глазурь','3 капли'],['Ягода и шард','по декору']],steps:['Савоярди кусочками, 14 г пропитки.','60 г крема.','2 г крошки савоярди + 2 г пропитки.','Ещё 60 г крема, плёнка в контакт, выдержка.','Декорировать не более чем за 30 минут до подачи.'],note:'ТК: 168 ±5 г. Меню: 250 г. Расхождение требует уточнения.'}
+];
+
+const REGISTRY = [
+['Горячее','Удон с курицей терияки','480 г','750 ₽','НЕТ ТК'],['Горячее','Пад Тай с креветками','350 г','800 ₽','ТК v1, до тест-кука'],['Горячее','Креветки в соусе из чёрного перца','350 г','850 ₽','ТК v1.0, до тест-кука'],['Горячее','Курица Кунг-пао','400 г','650 ₽','ТК v5'],['Горячее','Свинина в кисло-сладком соусе','350 г','700 ₽','НЕТ ТК'],['Горячее','Хун-шао-жоу','350 г','650 ₽','ТК v3'],
+['Супы','Том Ям','500 г','800 ₽','НЕТ ТК в пакете'],['Супы','Мисо-рамен','750 г','1 000 ₽','ТК v0'],['Супы','Фо Бо','650 г','900 ₽','НЕТ ТК'],
+['Салаты','Битые огурцы','250 г','300 ₽','НЕТ ТК'],['Салаты','Ясай-юдзу','250 г','400 ₽','НЕТ ТК'],['Салаты','Салат с креветками и авокадо','350 г','700 ₽','НЕТ ТК'],
+['Гёдза','С креветками','180 г','700 ₽','Есть ТК начинки; отдача по линии'],['Гёдза','Со свининой','180 г','500 ₽','НЕТ ТК'],['Гёдза','С курицей','180 г','500 ₽','НЕТ ТК'],
+['Закуски','Маринованный дайкон','50 г','100 ₽','НЕТ ТК'],['Закуски','Вешенки в кисло-сладком соусе','50 г','150 ₽','ТК ПФ v2; прямой отпуск'],['Закуски','Карааге','250 г','600 ₽','НЕТ ТК'],
+['Десерты','Чайная груша','350 г','700 ₽','НЕТ ТК; есть дегустационные данные'],['Десерты','Пуэромису','250 г','750 ₽','ТК v1.4'],['Десерты','Фисташка-малина','210 г','600 ₽','НЕТ ТК'],['Десерты','Пирожное шу','170 г','450 ₽','НЕТ ТК'],['Десерты','Золотой метеорит','250 г','500 ₽','НЕТ ТК'],['Десерты','Чизкейк в шоколаде','250 г','600 ₽','НЕТ ТК']
+];
+
+const ISSUES = [
+['Вешенки','В текущем HTML используется загруженная ТК v2: 743 г готовых грибов. На присланном фото фигурирует другая редакция с 781 г и иным соусом.'],
+['Креветки black pepper','Меню 350 г, карта около 365 г. В одной версии карты цена 800 ₽, в меню 850 ₽.'],
+['Кунг-пао','Меню 400 г, расчёт карты около 445 г с рисом.'],
+['Пад Тай','Меню 350 г, тестовый ожидаемый выход 370–420 г. Порция соуса 55–60 г не утверждена.'],
+['Хун-шао-жоу','Расчётная сборка около 343 г против 350 г в меню. Дополнительная вода задаётся по уровню.'],
+['Мисо-рамен','Лапша временная, навеска не утверждена; бульон, тарэ, аромамасло и яйцо имеют статус v0.'],
+['Адзи-тама','База маринада покрывает 10–12 яиц, поэтому масштаб зависит от формы ёмкости. Срок вынутого яйца не подтверждён.'],
+['Пуэромису','ТК 168 ±5 г против 250 г в меню. В тексте пропитка около 22 г, в сборке 16 г.'],['Кунг-пао','Курица на линии скорректирована до 150 г нетто. Кунжутное масло в финале ещё уточняется у Дениса.'],['Фо-бо','Раскладка бульона появилась, но полная технология варки ещё дописывается по процессу. Финиш считать только от фактического выхода готового бульона.'],['Карааге','Маринад есть; время и режим маринования пока не зафиксированы.']
+];
+
+let exact=false;
+function num(v,unit=''){
+ if(!Number.isFinite(v)) return '—';
+ let d=exact?2:(Math.abs(v)<10?1:0);
+ let s=v.toLocaleString('ru-RU',{minimumFractionDigits:0,maximumFractionDigits:d});
+ return `${s}${unit?' '+unit:''}`;
+}
+function ingredientAmount(i,k){
+ if(i.min!=null) return `${num(i.min*k,i.u)}–${num(i.max*k,i.u)}`;
+ return num(i.a*k,i.u);
+}
+function cardBase(c){ return c.dynamicBase?c.dynamicBase(c):c.base; }
+function renderPF(){
+ const root=document.getElementById('pfGrid'); root.innerHTML='';
+ PF.forEach(c=>{
+  c.option=c.option||c.options?.values[0].v;
+  const saved=localStorage.getItem('gb_'+c.id);
+  const initial=saved!==null?Number(saved):c.defaultValue;
+  const el=document.createElement('article'); el.className='card searchable'; el.dataset.search=(c.name+' '+c.source+' '+c.version).toLowerCase(); el.dataset.id=c.id;
+  el.innerHTML=`<div class="card-head"><h3>${c.name}</h3><div class="meta">${c.source}</div><span class="status ${c.state}">${c.version}</span></div>
+  <div class="calc"><label class="input-label" for="in_${c.id}">${c.anchorLabel}</label><div class="input-wrap"><input class="anchor-input" id="in_${c.id}" type="number" min="0" step="any" inputmode="decimal" value="${initial}"><span class="unit-chip">${c.unit}</span></div>
+  <div class="preset-row"><button class="preset" data-mul=".5">× 0,5</button><button class="preset" data-mul=".9">−10%</button><button class="preset" data-mul="1.1">+10%</button><button class="preset" data-mul="2">× 2</button><button class="preset" data-reset="1">База</button></div>
+  ${c.options?`<div class="option-row"><select aria-label="${c.options.label}">${c.options.values.map(o=>`<option value="${o.v}">${o.t}</option>`).join('')}</select></div>`:''}
+  <div class="stats"></div><div class="table-wrap"><table class="recipe-table"><thead><tr><th>Компонент</th><th>Нужно</th></tr></thead><tbody></tbody></table></div>
+  <div class="note ${c.state==='draft'?'danger':''}">${c.note}</div><div class="actions"><button class="copy-btn">Скопировать раскладку</button><button class="details-btn">Технология</button></div></div>
+  <div class="details"><ol>${c.steps.map(x=>`<li>${x}</li>`).join('')}</ol><ul class="critical">${c.critical.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+  root.appendChild(el);
+  const input=el.querySelector('input');
+  const select=el.querySelector('select');
+  const update=()=>{
+    let v=Math.max(0,Number(input.value)||0); localStorage.setItem('gb_'+c.id,String(v));
+    if(select) c.option=select.value;
+    const b=cardBase(c), k=v/b;
+    const tbody=el.querySelector('tbody');
+    let rows='';
+    if(!c.hideAnchorRow) rows+=`<tr class="anchor-row"><td>${c.anchorIngredient}</td><td>${num(v,c.unit)}</td></tr>`;
+    rows+=c.ingredients.map(i=>`<tr><td>${i.group?`<small>${i.group}</small><br>`:''}${i.n}${i.extra?`<br><small class="meta">${i.extra}</small>`:''}</td><td>${ingredientAmount(i,k)}</td></tr>`).join('');
+    tbody.innerHTML=rows;
+    el.querySelector('.stats').innerHTML=c.stats(v,b).map(s=>`<div class="stat"><b>${typeof s[1]==='number'?num(s[1],s[2]):s[1]}</b><span>${s[0]}</span></div>`).join('');
+  };
+  input.addEventListener('input',update); if(select) select.addEventListener('change',update);
+  el.querySelectorAll('.preset').forEach(btn=>btn.addEventListener('click',()=>{let v=Number(input.value)||0;if(btn.dataset.reset){input.value=c.base}else{input.value=Math.round(v*Number(btn.dataset.mul)*100)/100}update()}));
+  el.querySelector('.details-btn').addEventListener('click',e=>{const d=el.querySelector('.details');d.classList.toggle('open');e.target.textContent=d.classList.contains('open')?'Скрыть':'Технология'});
+  el.querySelector('.copy-btn').addEventListener('click',async e=>{
+    let lines=[c.name,`${c.anchorLabel}: ${num(Number(input.value)||0,c.unit)}`];
+    el.querySelectorAll('tbody tr').forEach(tr=>{const td=tr.querySelectorAll('td');lines.push(`${td[0].innerText.replace(/\n/g,' ')} — ${td[1].innerText}`)});
+    lines.push(...Array.from(el.querySelectorAll('.stat')).map(x=>`${x.querySelector('span').innerText}: ${x.querySelector('b').innerText}`));
+    const text=lines.join('\n');
+    let ok=false;
+    try{if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(text);ok=true}}catch{}
+    if(!ok){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();try{ok=document.execCommand('copy')}catch{}ta.remove()}
+    e.target.textContent=ok?'Скопировано':'Выдели вручную';setTimeout(()=>e.target.textContent='Скопировать раскладку',1400)
+  });
+  update();
+ });
+}
+function renderLine(){const root=document.getElementById('lineGrid');root.innerHTML=LINE.map(m=>`<article class="card quick-card searchable" data-search="${(m.name+' '+m.meta+' '+m.flag+' '+(m.search||'')).toLowerCase()}"><h3>${m.name}</h3><div class="meta">${m.meta}</div><span class="flag ${m.flag==='подтверждено'?'ok':'warn'}">${m.flag}</span>${m.blocks.map(b=>`<div class="quick-block"><h4>${b.h}</h4>${b.t==='ol'?`<ol>${b.i.map(x=>`<li>${x}</li>`).join('')}</ol>`:`<ul>${b.i.map(x=>`<li>${x}</li>`).join('')}</ul>`}</div>`).join('')}</article>`).join('')}
+function renderDesserts(){const root=document.getElementById('dessertGrid');root.innerHTML=DESSERTS.map(d=>`<article class="card dessert-card searchable" data-search="${(d.name+' '+d.meta+' '+(d.search||'')).toLowerCase()}"><h3>${d.name}</h3><div class="meta">${d.meta}</div><div class="big">${d.big}</div><ol class="steps">${d.steps.map(x=>`<li>${x}</li>`).join('')}</ol>${d.note?`<div class="note">${d.note}</div>`:''}</article>`).join('')}
+function openImage(src,cap){const m=document.getElementById('imgModal');document.getElementById('imgModalPic').src=src;document.getElementById('imgModalCap').textContent=cap||'';m.classList.add('open');m.setAttribute('aria-hidden','false')}
+function closeImage(){const m=document.getElementById('imgModal');m.classList.remove('open');m.setAttribute('aria-hidden','true')}
+function renderGallery(){const root=document.getElementById('galleryGrid');root.innerHTML=GALLERY.map(g=>`<article class="photo-card searchable" data-search="${(g.title+' '+g.caption+' '+(g.search||'')).toLowerCase()}"><img src="${g.img}" alt="${g.title}" data-cap="${g.title} — ${g.caption}"><div class="body"><h3>${g.title}</h3><div class="meta">${g.caption}</div></div></article>`).join('');root.querySelectorAll('img').forEach(img=>img.addEventListener('click',()=>openImage(img.src,img.dataset.cap)))}
+function renderMenu(){
+ const root=document.getElementById('menuGrid');
+ root.innerHTML=MENU.map(m=>`<article class="card menu-card searchable" data-search="${(m.name+' '+m.meta+' '+m.status).toLowerCase()}"><h3>${m.name}</h3><div class="meta">${m.meta}</div><span class="status">${m.status}</span><div class="menu-columns"><table class="mini-table">${m.ings.map(i=>`<tr><td>${i[0]}</td><td>${i[1]}</td></tr>`).join('')}</table><ol class="steps">${m.steps.map(x=>`<li>${x}</li>`).join('')}</ol></div><div class="note">${m.note}</div></article>`).join('');
+}
+function renderRegistry(){document.getElementById('registryBody').innerHTML=REGISTRY.map(r=>`<tr class="searchable" data-search="${r.join(' ').toLowerCase()}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="${r[4].startsWith('НЕТ')?'none':'has'}">${r[4]}</td></tr>`).join('')}
+function renderIssues(){document.getElementById('issuesGrid').innerHTML=ISSUES.map(x=>`<article class="card menu-card searchable" data-search="${x.join(' ').toLowerCase()}"><h3>${x[0]}</h3><div class="note danger">${x[1]}</div></article>`).join('')}
+function applySearch(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ const active=document.querySelector('.section.active');
+ active.querySelectorAll('.searchable').forEach(x=>x.style.display=!q||x.dataset.search.includes(q)?'':'none');
+ if(active.id==='pf') document.getElementById('pfEmpty').style.display=Array.from(active.querySelectorAll('.searchable')).some(x=>x.style.display!=='none')?'none':'block';
+ if(active.id==='menu') document.getElementById('menuEmpty').style.display=Array.from(active.querySelectorAll('.searchable')).some(x=>x.style.display!=='none')?'none':'block';
+ if(active.id==='line') document.getElementById('lineEmpty').style.display=Array.from(active.querySelectorAll('.searchable')).some(x=>x.style.display!=='none')?'none':'block';
+ if(active.id==='desserts') document.getElementById('dessertEmpty').style.display=Array.from(active.querySelectorAll('.searchable')).some(x=>x.style.display!=='none')?'none':'block';
+ if(active.id==='gallery') document.getElementById('galleryEmpty').style.display=Array.from(active.querySelectorAll('.searchable')).some(x=>x.style.display!=='none')?'none':'block';
+}
+renderPF();renderLine();renderDesserts();renderGallery();renderMenu();renderRegistry();renderIssues();
+
+function activateTab(tabId,{resetScroll=false}={}){
+ const target=document.querySelector(`.tab[data-tab="${tabId}"]`) || document.querySelector('.tab');
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+ target.classList.add('active');
+ const section=document.getElementById(target.dataset.tab); if(section) section.classList.add('active');
+ localStorage.setItem('gb_active_tab',target.dataset.tab);
+ applySearch();
+ if(resetScroll) window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>activateTab(t.dataset.tab,{resetScroll:true})));
+
+const searchInput=document.getElementById('search');
+const savedSearch=localStorage.getItem('gb_search')||'';
+searchInput.value=savedSearch;
+searchInput.addEventListener('input',()=>{localStorage.setItem('gb_search',searchInput.value);applySearch()});
+
+exact=localStorage.getItem('gb_exact_rounding')==='1';
+document.getElementById('roundToggle').textContent='Округление: '+(exact?'точное':'кухня');
+document.getElementById('roundToggle').addEventListener('click',e=>{exact=!exact;localStorage.setItem('gb_exact_rounding',exact?'1':'0');e.target.textContent='Округление: '+(exact?'точное':'кухня');renderPF();applySearch()});
+
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.querySelector('.img-close').addEventListener('click',closeImage);
+document.getElementById('imgModal').addEventListener('click',e=>{if(e.target.id==='imgModal')closeImage()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeImage()});
+
+let scrollTimer=null;
+window.addEventListener('scroll',()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>localStorage.setItem('gb_scroll_y',String(window.scrollY)),120)},{passive:true});
+const savedTab=localStorage.getItem('gb_active_tab')||'pf';
+activateTab(savedTab);
+setTimeout(()=>{const y=Number(localStorage.getItem('gb_scroll_y')||0);if(Number.isFinite(y)&&y>0)window.scrollTo(0,y)},80);
+</script>
+</body>
+</html>
